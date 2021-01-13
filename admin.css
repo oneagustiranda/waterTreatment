@@ -1,0 +1,11 @@
+.nav-link:hover {
+    background-color:gray ;
+}
+
+.display-4 {
+    font-size: bold;
+}
+
+.col-md{
+    height: 100%;
+}
