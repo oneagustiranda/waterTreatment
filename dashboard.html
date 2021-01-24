@@ -16,6 +16,7 @@
   <body>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -46,19 +47,25 @@
         console.log(error)
       }
 
-      function overRide(){
-      return firebase.database().ref('/override/').once('value').then((snapshot) => {
-        var flowmeter = (snapshot.val() && snapshot.val().flowmeter) || 'Anonymous';
-        // ...
-        console.log(override.flowmeter)
-      });}
-
       function backWash(){
         firebase.database().ref('backwash').set({
           backwash:true
         });
       }
+      
+      function overRide(flowmeter, ph, tds){
+        firebase.database().ref('override').once('value', function (snapshot){
+          var getflow=ChildSnapshot.val().flowmeter;
+          var getph=snapshot.val().ph;
+          var gettds=snapshot.val().tds;
 
+          document.getElementById("getflow").innerHTML=getflow;
+          document.getElementById("getph").innerHTML=getph;
+          document.getElementById("gettds").innerHTML=gettds;
+        })
+      }
+
+     
     </script>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary text-white fixed-top">
@@ -112,8 +119,8 @@
                       <td width=60%>
                         <h4 class="card-title"><b>OVERRIDE</b></h4>
                         <h6 class="card-text text-muted">SYSTEM</h6>
-                          <p>Flowmeter <b><script>innerHTML="flowmeter()"</script> Liter/Jam</b></p>
-                          <p>pH dan tds <b>4</b> & <b>60 ppm</b></p>
+                          <p>Flowmeter <b><i id="getflow"></i> Liter/Jam</b></p>
+                          <p>pH dan tds <b><i id="getph"></i></b> & <b><i id="gettds"></i> ppm</b></p>
                       </td>
                       <td width=40% class="pl-3">
                         <div class="progress-circle progress-85"><span>85</span></div>
