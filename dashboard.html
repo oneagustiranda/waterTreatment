@@ -46,6 +46,19 @@
         console.log(error)
       }
 
+      function overRide(){
+      return firebase.database().ref('/override/').once('value').then((snapshot) => {
+        var flowmeter = (snapshot.val() && snapshot.val().flowmeter) || 'Anonymous';
+        // ...
+        console.log(override.flowmeter)
+      });}
+
+      function backWash(){
+        firebase.database().ref('backwash').set({
+          backwash:true
+        });
+      }
+
     </script>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary text-white fixed-top">
@@ -61,7 +74,7 @@
     <div class="container-fluid">
       <div class="row mt-5">
         <div class="col-md-2 bg-dark mt-2 pt-4">
-          <ul class="nav flex-column ml-3 mb-5">
+          <ul class="nav flex-column ml-3 mb-5 sidebar">
             <li class="nav-item">
               <a class="nav-link active text-white" href="dashboard.html"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a><hr class="bg-white">
             </li>
@@ -118,10 +131,11 @@
                     <tr>
                       <td>
                         <div class="mb-4">
-                          <h4 class="card-title"><b>SURVEILLANCE</b></h4>
+                          <h4 class="card-title"><b>BACKWASH</b></h4>
                           <h6 class="card-text text-muted">SYSTEM</h6>
+                          <p>Dalam sehari sudah melakukan <b>2x</b> backwash</p>
                         </div>
-                        <a href="#" class="btn rounded-pill btn-outline-primary">Check Camera</a>
+                        <a href="#" class="btn rounded-pill btn-outline-primary" onClick="backWash()">Push Button</a>
                       </td>
                       <td><img src="#" alt=""></td>
                     </tr>
@@ -130,52 +144,6 @@
               </div>
             </div>
           </div><br>
-          <div class="card shadow p-3 mb-3">
-            <div class="card-body">
-              <center><h5 class="card-title"><b>TANGKI BACKWASH</b></h5></center>
-              <table border="0">
-                <tr>
-                  <td class="p-2">
-                    <div class="card bg-primary text-white" style="width: 11rem;">
-                      <div class="card-body">
-                        <h4 class="card-title">TANGKI 1</h4>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="p-2">
-                    <div class="card bg-primary text-white" style="width: 11rem;">
-                      <div class="card-body">
-                        <h4 class="card-title">TANGKI 2</h4>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="p-2">
-                    <div class="card bg-primary text-white" style="width: 11rem;">
-                      <div class="card-body">
-                        <h4 class="card-title">TANGKI 3</h4>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="p-2">
-                    <div class="card bg-primary text-white" style="width: 11rem;">
-                      <div class="card-body">
-                        <h4 class="card-title">TANGKI 4</h4>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="card" style="width: 11rem;">
-                      <div class="card-body">
-                        <h6 class="card-text text-muted">T. Backwash : <b>2x</b></h6>
-                        <a href="backwash.html" class="btn btn-primary bg-dark">backwash</a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-
           </div>
         </div>
       </div>
